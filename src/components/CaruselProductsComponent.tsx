@@ -1,5 +1,5 @@
 import { IgrCarousel, IgrCarouselSlide } from "igniteui-react";
-import type { Product } from "../../assets/data/Products.ts";
+import type { Product } from "../assets/data/Products.ts";
 import { Link } from "react-router-dom";
 
 type CaruselProductsComponentProps = {

@@ -1,11 +1,11 @@
 // import React from 'react'
 import { useParams, useNavigate } from "react-router-dom";
-import { products } from "../../assets/data/Products";
+import { products } from "../assets/data/Products";
 import { useState } from "react";
-import arrowIcon from "../../icons/arrowIcon.svg";
-import crossIcon from "../../icons/crossIcon.svg";
-import type { CartItem } from "../../components/Cart/CartComponent";
-import "../../components/Animations/animations.css";
+import arrowIcon from "../icons/arrowIcon.svg";
+import crossIcon from "../icons/crossIcon.svg";
+import type { CartItem } from "../components/CartComponent";
+import "../components/Animations/animations.css";
 
 
 

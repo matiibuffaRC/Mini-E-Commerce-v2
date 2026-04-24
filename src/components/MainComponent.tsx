@@ -1,12 +1,12 @@
 // import React from 'react'
-import CaruselComponent from "../Carusel/CaruselComponent";
-import CaruselTextsComponent from "../CaruselTexts/CaruselTextsComponent";
-import CaruselProductsComponent from "../CaruselProducts/CaruselProductsComponent";
-import casaBuffa from "../../assets/imgs/casaBuffaLogo - Editado.png"
-import { CaruselImages } from "../../assets/data/CaruselImages.ts";
-import { products } from "../../assets/data/Products.ts";
-import { texts } from "../../assets/data/TextsCarusel.ts";
-import "../Animations/animations.css";
+import CaruselComponent from "./CaruselComponent";
+import CaruselTextsComponent from "./CaruselTextsComponent.tsx";
+import CaruselProductsComponent from "./CaruselProductsComponent";
+import casaBuffa from "../assets/imgs/casaBuffaLogo - Editado.png"
+import { CaruselImages } from "../assets/data/CaruselImages.ts";
+import { products } from "../assets/data/Products.ts";
+import { texts } from "../assets/data/TextsCarusel.ts";
+import "./Animations/animations.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 

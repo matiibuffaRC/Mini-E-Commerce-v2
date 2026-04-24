@@ -1,15 +1,15 @@
-import HeaderComponent from "./components/Header/HeaderComponent";
-import ScrollToTop from "./components/ScrollToTop/ScrollToTopComponent";
-import FooterComponent from "./components/Footer/FooterComponent";
-import CartComponent from "./components/Cart/CartComponent";
-import type { CartItem } from "./components/Cart/CartComponent";
+import HeaderComponent from "./components/HeaderComponent";
+import ScrollToTop from "./components/ScrollToTopComponent";
+import FooterComponent from "./components/FooterComponent";
+import CartComponent from "./components/CartComponent";
+import type { CartItem } from "./components/CartComponent";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 
-import HomePage from "./pages/HomePage/HomePage";
-import ProductPage from "./pages/ProductPage/ProductPage";
-import Catalog from "./pages/Catalog/Catalog";
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import Catalog from "./pages/Catalog";
 
 function App() {
   const [cart, setCart] = useState<CartItem[]>([]);

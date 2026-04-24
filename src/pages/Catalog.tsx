@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import crossIcon from "../../icons/crossIcon.svg";
-import arrowIcon from "../../icons/down-arrow.png";
-import threeDotsIcon from "../../icons/threeDots.svg";
-import { products } from "../../assets/data/Products.ts";
+import crossIcon from "../icons/crossIcon.svg";
+import arrowIcon from "../icons/down-arrow.png";
+import threeDotsIcon from "../icons/threeDots.svg";
+import { products } from "../assets/data/Products.ts";
 import { Link } from 'react-router-dom';
 
 function Catalog() {

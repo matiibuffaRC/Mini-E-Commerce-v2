@@ -1,7 +1,7 @@
 // import React from 'react'
-import instagramIcon from "../../icons/instagramIcon.svg";
-import facebookIcon from "../../icons/facebookIcon.svg";
-import MapsComponent from "../Maps/MapsComponent";
+import instagramIcon from "../icons/instagramIcon.svg";
+import facebookIcon from "../icons/facebookIcon.svg";
+import MapsComponent from "./MapsComponent";
 
 
 function FooterComponent() {

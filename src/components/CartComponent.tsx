@@ -1,9 +1,9 @@
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import downArrowIcon from "../../icons/down-arrow.png";
-import crossIcon from "../../icons/crossIcon.svg";
-import "../Animations/animations.css";
+import downArrowIcon from "../icons/down-arrow.png";
+import crossIcon from "../icons/crossIcon.svg";
+import "./Animations/animations.css";
 
 export type CartItem = {
     id: number;
@@ -14,7 +14,6 @@ export type CartItem = {
     total: number;
     img?: string;
 };
-
 
 type CartComponentProps = {
     handleClick: () => void;

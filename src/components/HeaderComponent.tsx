@@ -1,8 +1,8 @@
-import menuIcon from "../../icons/barsIcon.svg";
-import closeMenuIcon from "../../icons/crossIcon.svg";
+import menuIcon from "../icons/barsIcon.svg";
+import closeMenuIcon from "../icons/crossIcon.svg";
 import { useEffect, useState } from "react";
-import casaBuffaLogo from "../../assets/imgs/casaBuffaText.jpg";
-import type { CartItem } from "../Cart/CartComponent";
+import casaBuffaLogo from "../assets/imgs/casaBuffaText.jpg";
+import type { CartItem } from "./CartComponent";
 import { Link } from "react-router-dom";
 
 type HeaderComponentProps = {
