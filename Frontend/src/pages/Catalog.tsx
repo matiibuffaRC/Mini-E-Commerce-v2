@@ -120,7 +120,7 @@ function Catalog() {
                     )
             }else{
                 return filteredProducts.map(product => (
-                <div key={product.id} className="bg-[#eee] max-w-50 transition-all duration-200 fade-down rounded-xl overflow-hidden hover:scale-101 shadow-md hover:shadow-lg">
+                <div key={product.id} className="bg-[#eee] max-w-50 transition-all duration-200 fade-down rounded-xl overflow-hidden hover:scale-101 shadow-md hover:shadow-lg border border-red-500 w-100 mx-1">
                     <Link to={`/producto/${product.id}`}>
                         <div className="w-full h-50 overflow-hidden">
                             <img src={product.img} alt="Product image" className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"/>

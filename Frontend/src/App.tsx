@@ -10,6 +10,7 @@ import { useState } from "react";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import Catalog from "./pages/Catalog";
+import Panel from "./pages/PanelPage";
 
 function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -28,7 +29,8 @@ function App() {
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/producto/:id" element={<ProductPage  setCart={setCart} />}/>  
-          <Route path="/catalog" element={<Catalog />} />        
+          <Route path="/catalog" element={<Catalog />} />  
+          <Route path="/panelAdmin" element={<Panel />} />      
       </Routes>
       
       <FooterComponent></FooterComponent>
