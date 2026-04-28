@@ -108,7 +108,7 @@ function Catalog() {
     const printProducts = (type: string | null) => {
         const filteredProducts = type === null
             ? products
-            : products.filter(product => product.type === type);
+            : products.filter(product => product.categoria === type);
 
             if(filteredProducts.length === 0){
                 return (
