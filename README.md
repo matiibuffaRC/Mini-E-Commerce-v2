@@ -14,6 +14,8 @@ Prácticas que agregué:
       - Server.
       - DB.
       - Peticiones querys.
+  - División de un proyecto en frontend, backend y base de datos.
+  - Conocimientos en proyectos fullstack.
 
 Potenciales mejoras:
   - Escalabilidad del sistema.
