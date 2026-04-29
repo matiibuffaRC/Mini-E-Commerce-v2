@@ -87,29 +87,29 @@ function PanelPage() {
     }
 
     const updatedProduct = async () => {
-    try {
-        const response = await fetch(`http://localhost:3000/productos/${selectedProduct.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(selectedProduct),
-        });
-        if (!response.ok) {
-            throw new Error('Error al actualizar el producto');
+        try {
+            const response = await fetch(`http://localhost:3000/productos/${selectedProduct.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(selectedProduct),
+            });
+            if (!response.ok) {
+                throw new Error('Error al actualizar el producto');
+            }
+            const updatedData = await response.json();
+            // Actualiza el estado local con la nueva categoría
+            const updatedProductWithCategory = { 
+                ...updatedData, 
+                categoria: categories.find(cat => cat.id === updatedData.id_categoria)?.nombre || updatedData.categoria 
+            };
+            setProducts(products.map(prod => prod.id === selectedProduct.id ? updatedProductWithCategory : prod));
+            setIsModalOpen(false); // Cierra el modal
+        } catch (error) {
+            console.error('Error:', error);
+            // Opcional: muestra un mensaje de error al usuario
         }
-        const updatedData = await response.json();
-        // Actualiza el estado local con la nueva categoría
-        const updatedProductWithCategory = { 
-            ...updatedData, 
-            categoria: categories.find(cat => cat.id === updatedData.id_categoria)?.nombre || updatedData.categoria 
-        };
-        setProducts(products.map(prod => prod.id === selectedProduct.id ? updatedProductWithCategory : prod));
-        setIsModalOpen(false); // Cierra el modal
-    } catch (error) {
-        console.error('Error:', error);
-        // Opcional: muestra un mensaje de error al usuario
-    }
     };
     
     const creadtedProduct = async () => {
@@ -124,7 +124,8 @@ function PanelPage() {
             if(!response.ok){
                 throw new Error('Error al crear el producto');
             }
-            const created = await response.json();
+            const created = await response.json(); // La respuesta de la petición
+            // Le agregamos el nombre de la categoría para no trabajarlo sin ella 
             const productWithCategory = {
                 ...created,
                 categoria: categories.find(cat => cat.id === created.id_categoria)?.nombre
@@ -133,8 +134,36 @@ function PanelPage() {
             setProducts([...products, productWithCategory]);
 
             setIsCreateModalOpen(false);
+            
+            // Limpiamos el formulario de creación
+            setNewProduct({ 
+                nombre: "",
+                precio: "",
+                categoria: "",
+                id_categoria: null,
+            });
         } catch (error) {
             console.error('No se ha podido crear un nuevo producto: ', error);
+        }
+    }
+
+    const deletedProduct = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/productos/${selectedProduct.id}`, 
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                }
+            });
+            setProducts(products.filter(prod => prod.id !== selectedProduct.id));
+            setIsModalOpen(false);
+            
+            if(!response.ok){
+                throw new Error ('No se pudo eliminar dicho producto!');
+            }
+        } catch (error) {
+            console.error(error)    
         }
     }
 
@@ -173,7 +202,18 @@ function PanelPage() {
 
                 {/* Drawer */}
                 <div className="absolute bg-gray-900 w-full max-w-xl p-5 rounded-t-2xl animate-slideUp">
-                    <h2 className="text-lg mb-3">Editar producto</h2>
+                    <div className='flex flex-row w-full justify-between items-center mb-3'>
+                        <h2 className="text-lg">Editar producto</h2>
+                        <div className='bg-red-300 text-black px-2 py-1 rounded-3xl'>
+                            <h2 className='cursor-pointer'
+                                onClick={()=>{
+                                    setIsModalOpen(false);
+                                    deletedProduct();
+                                }}>
+                                Eliminar producto
+                            </h2>
+                        </div>
+                    </div>
 
                     <div className="flex flex-col gap-3">
                         <input
@@ -262,7 +302,7 @@ function PanelPage() {
                             type="number"
                             value={`${newProduct.precio}`}
                             className="p-2 bg-black border border-gray-600"
-                            onChange={(e) => setNewProduct({ ...newProduct, precio: e.target.value })}
+                            onChange={(e) => setNewProduct({ ...newProduct, precio: Number(e.target.value)})}
                         />
 
                         <select
