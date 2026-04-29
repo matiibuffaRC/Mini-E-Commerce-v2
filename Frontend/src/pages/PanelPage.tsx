@@ -65,26 +65,26 @@ function PanelPage() {
     },[])
 
     const printListProducts = () => {
-    return (
-        products
-            .sort((a, b) => a.id - b.id) // 👈 ordena por id
-            .map((product) => {
-                return (
-                    <div key={product.id} className='border-t border-gray-600 w-full flex flex-row justify-between'>
-                        <div className='px-2 py-1 flex flex-row gap-1'>
-                            <h3 className='border-r border-gray-700 px-1 w-7'>{product.id}</h3>
-                            <h3 className='border-r border-gray-700 px-1 w-50'>{product.nombre}</h3>
-                            <h3 className='border-r border-gray-700 px-1 w-25'>$ {product.precio}</h3>
-                            <h3 className='px-1'>{product.categoria}</h3>
+        return (
+            products
+                .sort((a, b) => a.id - b.id) // 👈 ordena por id
+                .map((product) => {
+                    return (
+                        <div key={product.id} className='border-t border-gray-600 w-full flex flex-row justify-between'>
+                            <div className='px-2 py-1 flex flex-row gap-1'>
+                                <h3 className='border-r border-gray-700 px-1 w-7'>{product.id}</h3>
+                                <h3 className='border-r border-gray-700 px-1 w-50'>{product.nombre}</h3>
+                                <h3 className='border-r border-gray-700 px-1 w-25'>$ {product.precio}</h3>
+                                <h3 className='px-1'>{product.categoria}</h3>
+                            </div>
+                            <div className='m-1 flex flex-col justify-center items-center'>
+                                <img src={editIcon} alt="Edit icon" className='invert w-4 h-4' onClick={() => handleEditClick(product)}/>
+                            </div>
                         </div>
-                        <div className='m-1 flex flex-col justify-center items-center'>
-                            <img src={editIcon} alt="Edit icon" className='invert w-4 h-4' onClick={() => handleEditClick(product)}/>
-                        </div>
-                    </div>
-                )
-            })
-    )
-}
+                    )
+                })
+        )
+    }
 
     const updatedProduct = async () => {
     try {
@@ -110,7 +110,33 @@ function PanelPage() {
         console.error('Error:', error);
         // Opcional: muestra un mensaje de error al usuario
     }
-};
+    };
+    
+    const creadtedProduct = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/productos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newProduct)
+            })
+            if(!response.ok){
+                throw new Error('Error al crear el producto');
+            }
+            const created = await response.json();
+            const productWithCategory = {
+                ...created,
+                categoria: categories.find(cat => cat.id === created.id_categoria)?.nombre
+            };
+
+            setProducts([...products, productWithCategory]);
+
+            setIsCreateModalOpen(false);
+        } catch (error) {
+            console.error('No se ha podido crear un nuevo producto: ', error);
+        }
+    }
 
     return (
         <section className="pt-17.5 bg-black min-h-screen text-gray-400 flex flex-col justify-center items-center">
@@ -210,6 +236,8 @@ function PanelPage() {
             </div>
             )}
 
+            {/* Menú para creación */}
+            
             {isCreateModalOpen && (
             <div className="fixed inset-0 z-50 flex items-end justify-center">
                 <div 
@@ -262,7 +290,7 @@ function PanelPage() {
                             className="bg-blue-600 p-2 mt-3 hover:text-white cursor-pointer"
                             onClick={() => {
                                 console.log("Nuevo producto creado:", newProduct);
-                                
+                                creadtedProduct();
                             }}>
                             Guardar producto
                         </button>
